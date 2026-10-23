@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://hamedsanaei.github.io/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://hamedsanaei.ir/fa/</loc></url>
+  <url><loc>https://hamedsanaei.ir/en/</loc></url>
+  <url><loc>https://hamedsanaei.ir/de/</loc></url>
 </urlset>

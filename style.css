@@ -54,6 +54,56 @@ a {
   gap: 18px;
 }
 
+.identity > div {
+  min-width: 0;
+}
+
+.language-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.language-switcher a {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font: 500 .82rem var(--sans);
+  line-height: 1.8;
+  text-decoration: none;
+}
+
+.language-switcher a[lang="fa"] {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+.language-switcher a[aria-current="page"] {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: -100px;
+  padding: 8px 16px;
+  background: white;
+  z-index: 1;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
 .avatar {
   width: 82px;
   height: 82px;
@@ -156,7 +206,7 @@ h2 {
 
 .item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 120px minmax(0, 1fr);
   gap: 24px;
   padding: 19px 0;
   border-bottom: 1px solid var(--line);
@@ -203,7 +253,7 @@ h2 {
 
 .project {
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: minmax(0, 1fr) 220px;
   gap: 24px;
   align-items: start;
   padding: 18px 0;
@@ -233,7 +283,7 @@ h2 {
 .project > span {
   color: var(--muted);
   font-size: .78rem;
-  text-align: right;
+  text-align: end;
 }
 
 .skills {
@@ -242,7 +292,7 @@ h2 {
 
 .skills > div {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 150px minmax(0, 1fr);
   gap: 20px;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
@@ -369,6 +419,39 @@ footer a:hover {
   color: var(--navy);
 }
 
+html[dir="rtl"] {
+  --sans: "Vazirmatn", Tahoma, system-ui, sans-serif;
+  --serif: "Vazirmatn", Tahoma, system-ui, sans-serif;
+}
+
+html[dir="rtl"] h1 {
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+html[dir="rtl"] h2 {
+  letter-spacing: normal;
+}
+
+.when {
+  text-align: start;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .when {
+  text-align: right;
+}
+
+.content,
+.project > div,
+.skills strong {
+  overflow-wrap: anywhere;
+}
+
+.skills strong[dir="ltr"] {
+  text-align: right;
+}
+
 @media (max-width: 720px) {
   .page {
     width: min(100% - 20px, 960px);
@@ -403,7 +486,11 @@ footer a:hover {
   }
 
   .project > span {
-    text-align: left;
+    text-align: start;
+  }
+
+  html[dir="rtl"] .project > span {
+    text-align: right;
   }
 
   .certificates,
