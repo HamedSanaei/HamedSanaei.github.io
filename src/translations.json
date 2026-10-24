@@ -87,5 +87,14 @@
   "Chinese": {"fa": "چینی", "de": "Chinesisch"},
   "Elementary proficiency": {"fa": "سطح مقدماتی", "de": "Grundkenntnisse"},
   "© 2026 Hamed Sanaei": {"fa": "© ۲۰۲۶ حامد ثنائی", "de": "© 2026 Hamed Sanaei"},
-  "hamedsan76@gmail.com": {"fa": "hamedsan76@gmail.com", "de": "hamedsan76@gmail.com"}
+  "hamedsan76@gmail.com": {"fa": "hamedsan76@gmail.com", "de": "hamedsan76@gmail.com"},
+  "Telegram": {"fa": "تلگرام", "de": "Telegram"},
+  "X / Twitter": {"fa": "ایکس / توییتر", "de": "X / Twitter"},
+  "My Websites": {"fa": "وب‌سایت‌های من", "de": "Meine Websites"},
+  "Personal portfolio": {"fa": "پرتفولیوی شخصی", "de": "Persönliches Portfolio"},
+  "Cloud server platform": {"fa": "پلتفرم سرور ابری", "de": "Cloud-Server-Plattform"},
+  "Vendora online shop": {"fa": "فروشگاه اینترنتی وندورا", "de": "Vendora-Onlineshop"},
+  "hamedsanaei.ir": {"fa": "hamedsanaei.ir", "de": "hamedsanaei.ir"},
+  "parserver.ir": {"fa": "parserver.ir", "de": "parserver.ir"},
+  "vendorashop.ir": {"fa": "vendorashop.ir", "de": "vendorashop.ir"}
 }

@@ -15,7 +15,7 @@
 
 ## ویرایش و پیش‌نمایش
 
-ساختار و متن انگلیسی در `src/portfolio.html`، ترجمه‌ها در `src/translations.json`، مشخصات سئو در `scripts/build_site.py` و ظاهر در `style.css` است. پس از ویرایش، خروجی‌ها را بسازید:
+ساختار و متن انگلیسی در `src/portfolio.html`، ترجمه‌ها در `src/translations.json`، مشخصات و لینک پروژه‌ها در `src/projects.json`، مشخصات سئو در `scripts/build_site.py` و ظاهر در `style.css` است. پس از ویرایش، خروجی‌ها را بسازید:
 
 ```powershell
 python scripts/build_site.py

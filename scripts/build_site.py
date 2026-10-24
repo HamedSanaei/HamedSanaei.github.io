@@ -37,6 +37,37 @@ META = {
 }
 
 
+PROJECT_LABELS = {
+    "fa": {"source": "کد در گیت‌هاب", "site": "وب‌سایت", "bot": "ربات تلگرام"},
+    "en": {"source": "Source on GitHub", "site": "Website", "bot": "Telegram bot"},
+    "de": {"source": "Quellcode auf GitHub", "site": "Website", "bot": "Telegram-Bot"},
+}
+
+
+def render_projects(language):
+    projects = json.loads((ROOT / "src/projects.json").read_text(encoding="utf-8"))
+    labels = PROJECT_LABELS[language]
+    esc = html.escape
+
+    def links(project):
+        result = f'<div class="project-links"><a href="{esc(project["repository"])}" target="_blank" rel="noopener">{labels["source"]}</a>'
+        if project.get("live"):
+            kind = labels[project.get("liveType", "site")]
+            result += f'<a href="{esc(project["live"])}" target="_blank" rel="noopener">{kind} · <bdi dir="ltr">{esc(project["liveLabel"])}</bdi></a>'
+        return result + '</div>'
+
+    result = '<div class="projects">\n'
+    for project in projects["featured"]:
+        result += f'''<article class="project">
+  <div><h3><bdi dir="auto">{esc(project["name"])}</bdi></h3>
+    <p>{esc(project["description"][language])}</p>
+    {links(project)}
+  </div>
+  <span dir="ltr">{esc(project["technologies"])}</span>
+</article>\n'''
+    return result + '</div>'
+
+
 def render_body(language, translations):
     body = (ROOT / "src/portfolio.html").read_text(encoding="utf-8")
 
@@ -50,6 +81,7 @@ def render_body(language, translations):
         return text.replace(text.strip(), translations[key][language])
 
     body = re.sub(r"(?<=>)[^<]+(?=<)", translate, body)
+    body = body.replace('<!-- PROJECTS -->', render_projects(language))
     body = re.sub(r'(href|src)="(assets/[^\"]+)"', r'\1="/\2"', body)
     body = body.replace('<main>', '<main id="main-content">')
     body = body.replace('aria-label="Contact links"', f'aria-label="{META[language]["contacts"]}"')
@@ -81,7 +113,7 @@ def render_page(language, base, translations):
         "@context": "https://schema.org", "@type": "Person", "@id": f"{base}/#person",
         "name": meta["name"], "alternateName": "Hamed Sanaei" if language == "fa" else "حامد ثنائی",
         "url": url, "image": f"{base}/assets/profile.png", "email": "mailto:hamedsan76@gmail.com",
-        "jobTitle": meta["job"], "sameAs": ["https://github.com/HamedSanaei", "https://www.linkedin.com/in/hamedsanaei/"],
+        "jobTitle": meta["job"], "sameAs": ["https://github.com/HamedSanaei", "https://www.linkedin.com/in/hamedsanaei/", "https://t.me/Hamed_Sanaei", "https://x.com/hamedsan"],
     }
     return f'''<!DOCTYPE html>
 <html lang="{language}" dir="{"rtl" if language == "fa" else "ltr"}">

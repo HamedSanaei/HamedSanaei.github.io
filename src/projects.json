@@ -1,0 +1,54 @@
+{
+  "featured": [
+    {
+      "name": "Vendora",
+      "repository": "https://github.com/HamedSanaei/Vendora",
+      "live": "https://vendorashop.ir/",
+      "liveLabel": "vendorashop.ir",
+      "technologies": "ASP.NET Core · React · Next.js",
+      "description": {
+        "en": "E-commerce platform with a bilingual storefront, product catalog, shopping flow and administration panel, built with clean architecture.",
+        "fa": "پلتفرم فروشگاهی با ویترین دوزبانه، کاتالوگ محصولات، فرایند خرید و پنل مدیریت، مبتنی بر معماری پاک.",
+        "de": "E-Commerce-Plattform mit zweisprachigem Shop, Produktkatalog, Kaufprozess und Verwaltungsoberfläche auf Basis von Clean Architecture."
+      }
+    },
+    {
+      "name": "ParServer",
+      "repository": "https://github.com/HamedSanaei/cloud",
+      "live": "https://parserver.ir/",
+      "liveLabel": "parserver.ir",
+      "technologies": "React · TypeScript · Fastify · PostgreSQL",
+      "description": {
+        "en": "Cloud server platform with server provisioning, hourly billing, wallets, invoices and a responsive management console.",
+        "fa": "پلتفرم سرور ابری با ساخت و مدیریت سرورها، محاسبهٔ هزینهٔ ساعتی، کیف پول، فاکتورها و کنسول مدیریت واکنش‌گرا.",
+        "de": "Cloud-Server-Plattform mit Bereitstellung und Verwaltung von Servern, stündlicher Abrechnung, Wallets, Rechnungen und responsiver Verwaltungskonsole."
+      }
+    },
+    {
+      "name": "DownloadKadeBot",
+      "repository": "https://github.com/HamedSanaei/telegram-media-downloader-bot",
+      "live": "https://t.me/DownloadKadeBot",
+      "liveLabel": "@DownloadKadeBot",
+      "liveType": "bot",
+      "technologies": "Python · Docker · Redis · SQLite",
+      "description": {
+        "en": "Telegram media downloader with format and quality selection, background workers, persistent job state and operator tooling.",
+        "fa": "ربات دانلود رسانه در تلگرام با انتخاب قالب و کیفیت، پردازش پس‌زمینه، ذخیرهٔ پایدار وضعیت درخواست‌ها و ابزارهای مدیریت.",
+        "de": "Telegram-Mediendownloader mit Format- und Qualitätsauswahl, Hintergrundverarbeitung, persistentem Auftragsstatus und Verwaltungswerkzeugen."
+      }
+    },
+    {
+      "name": "ServerHubbBot",
+      "repository": "https://github.com/HamedSanaei/cloud-server-seller-bot",
+      "technologies": "Python · FastAPI · PostgreSQL · Redis",
+      "description": {
+        "en": "Telegram-first cloud server platform starter with provider integrations, background orchestration, wallet accounting and billing.",
+        "fa": "پایهٔ پلتفرم فروش سرور از طریق تلگرام با اتصال به ارائه‌دهندگان، اجرای عملیات در پس‌زمینه، حسابداری کیف پول و محاسبهٔ هزینه‌ها.",
+        "de": "Starter für eine Telegram-basierte Cloud-Server-Plattform mit Anbieterintegrationen, Hintergrundverarbeitung, Wallet-Buchhaltung und Abrechnung."
+      },
+      "live": "https://t.me/ServerHubbBot",
+      "liveLabel": "@ServerHubbBot",
+      "liveType": "bot"
+    }
+  ]
+}

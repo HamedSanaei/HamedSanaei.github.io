@@ -14,10 +14,22 @@ class Page(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
         self.tags = []
+        self.projects = []
+        self.current_project = None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
-        self.tags.append((tag, dict(attrs)))
+        attrs = dict(attrs)
+        self.tags.append((tag, attrs))
+        if tag == "article" and attrs.get("class") == "project":
+            self.current_project = []
+            self.projects.append(self.current_project)
+        if tag == "a" and self.current_project is not None:
+            self.current_project.append(attrs["href"])
+
+    def handle_endtag(self, tag):
+        if tag == "article":
+            self.current_project = None
 
     def find(self, tag, **attrs):
         return [a for t, a in self.tags if t == tag and all(a.get(k) == v for k, v in attrs.items())]
@@ -33,6 +45,14 @@ def check(root=ROOT):
         page = Page(text)
         assert page.find("html", lang=lang, dir="rtl" if lang == "fa" else "ltr"), f"Incorrect lang/dir: {lang}"
         assert len(page.find("h1")) == 1, f"Expected one H1: {lang}"
+        assert {tuple(links) for links in page.projects} == {
+            ("https://github.com/HamedSanaei/Vendora", "https://vendorashop.ir/"),
+            ("https://github.com/HamedSanaei/cloud", "https://parserver.ir/"),
+            ("https://github.com/HamedSanaei/telegram-media-downloader-bot", "https://t.me/DownloadKadeBot"),
+            ("https://github.com/HamedSanaei/cloud-server-seller-bot", "https://t.me/ServerHubbBot"),
+        } and len(page.projects) == 4, f"Expected four projects, each with its source and live link: {lang}"
+        for profile in ("https://t.me/Hamed_Sanaei", "https://x.com/hamedsan"):
+            assert page.find("a", href=profile), f"Missing social profile: {lang}: {profile}"
         assert page.find("link", rel="canonical") == [{"rel": "canonical", "href": expected[lang]}], f"Canonical: {lang}"
         alternates = {a["hreflang"]: a["href"] for a in page.find("link", rel="alternate")}
         assert alternates == {**expected, "x-default": expected["fa"]}, f"Hreflang: {lang}"

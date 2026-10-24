@@ -286,6 +286,64 @@ h2 {
   text-align: end;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 12px;
+}
+
+.project-links a {
+  color: var(--navy);
+  font-size: .8rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
+.project-links a:hover {
+  color: var(--accent);
+}
+
+.website-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.website-links a {
+  padding: 18px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.website-links a:hover {
+  background: #faf9f6;
+  border-color: var(--navy);
+}
+
+.website-links strong,
+.website-links span {
+  display: block;
+}
+
+.website-links strong {
+  color: var(--navy);
+  font-size: .86rem;
+}
+
+.website-links span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+html[dir="rtl"] .website-links strong {
+  text-align: right;
+}
+
 .skills {
   border-top: 1px solid var(--line);
 }
@@ -494,7 +552,8 @@ html[dir="rtl"] .when {
   }
 
   .certificates,
-  .languages {
+  .languages,
+  .website-links {
     grid-template-columns: 1fr;
   }
 
