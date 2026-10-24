@@ -9,6 +9,7 @@ import argparse
 import html
 import json
 import re
+from hashlib import sha256
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -107,6 +108,7 @@ def render_page(language, base, translations):
     meta = META[language]
     url = f"{base}/{language}/"
     esc = html.escape
+    stylesheet_version = sha256((ROOT / "style.css").read_bytes()).hexdigest()[:12]
     alternates = "\n".join(f'  <link rel="alternate" hreflang="{lang}" href="{base}/{lang}/">' for lang in LOCALES)
     og_alternates = "\n".join(f'  <meta property="og:locale:alternate" content="{locale}">' for lang, locale in LOCALES.items() if lang != language)
     person = {
@@ -148,7 +150,7 @@ def render_page(language, base, translations):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Vazirmatn:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v={stylesheet_version}">
   <script type="application/ld+json">
 {json.dumps(person, ensure_ascii=False, indent=2)}
   </script>
