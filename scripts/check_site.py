@@ -8,6 +8,11 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGUAGES = ("fa", "en", "de")
+PROFESSIONAL_PROFILES = {
+    "https://github.com/HamedSanaei",
+    "https://www.linkedin.com/in/hamedsanaei/",
+    "https://stackoverflow.com/users/10190605/hamed-sanaei",
+}
 
 
 class Page(HTMLParser):
@@ -73,14 +78,20 @@ def check(root=ROOT):
                     path /= "index.html"
                 assert path.is_file(), f"Broken local {name}: {lang}: {value}"
         start = text.index('<script type="application/ld+json">') + len('<script type="application/ld+json">')
-        person = json.loads(text[start:text.index("</script>", start)])
+        profile = json.loads(text[start:text.index("</script>", start)])
+        assert profile["@type"] == "ProfilePage" and profile["url"] == expected[lang]
+        person = profile["mainEntity"]
         assert person["@type"] == "Person" and person["url"] == expected[lang]
+        assert PROFESSIONAL_PROFILES <= set(person["sameAs"]), f"Missing identity links in structured data: {lang}"
+        assert all(page.find("a", href=url) for url in PROFESSIONAL_PROFILES), f"Missing visible profile links: {lang}"
+        assert page.find("link", rel="icon", href="/favicon.png", sizes="96x96"), f"Missing favicon: {lang}"
         if lang == "fa":
             assert '"name": "حامد ثنائی"' in text
         print(f"PASS {lang}: language, links, canonical, hreflang, metadata, structured data")
     redirect = Page((root / "index.html").read_text(encoding="utf-8"))
     assert redirect.find("meta", **{"http-equiv": "refresh", "content": "0; url=/fa/"})
     assert redirect.find("link", rel="canonical")[0]["href"] == expected["fa"]
+    assert redirect.find("link", rel="icon", href="/favicon.png", sizes="96x96")
     sitemap = ET.parse(root / "sitemap.xml")
     urls = [e.text for e in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
     assert len(urls) == 3 and set(urls) == set(expected.values())

@@ -18,25 +18,26 @@ NAMES = {"fa": "فارسی", "en": "English", "de": "Deutsch"}
 META = {
     "fa": {
         "title": "حامد ثنائی | مهندس نرم‌افزار و توسعه‌دهنده دات‌نت",
-        "description": "پرتفولیوی حامد ثنائی، مهندس نرم‌افزار و توسعه‌دهنده فول‌استک دات‌نت؛ سوابق کاری، پروژه‌ها و مهارت‌ها در بک‌اند، پایگاه داده، شبکه، زیرساخت و DevOps.",
+        "description": "حامد ثنائی، مهندس نرم‌افزار و توسعه‌دهنده فول‌استک دات‌نت. نمونه‌کارها، سوابق و راه‌های ارتباطی.",
         "name": "حامد ثنائی",
         "job": "مهندس نرم‌افزار و توسعه‌دهنده فول‌استک دات‌نت",
         "contacts": "راه‌های ارتباطی", "languages": "انتخاب زبان", "skip": "رفتن به محتوای اصلی",
     },
     "en": {
         "title": "Hamed Sanaei | Software Engineer",
-        "description": "Hamed Sanaei — Software Engineer and Full-Stack .NET Developer with experience in backend systems, databases, infrastructure, networking, DevOps and enterprise search.",
+        "description": "Hamed Sanaei, software engineer and full-stack .NET developer. Explore my projects, experience and contact links.",
         "name": "Hamed Sanaei", "job": "Software Engineer and Full-Stack .NET Developer",
         "contacts": "Contact links", "languages": "Choose language", "skip": "Skip to content",
     },
     "de": {
         "title": "Hamed Sanaei | Softwareentwickler",
-        "description": "Portfolio von Hamed Sanaei: Softwareentwickler und Full-Stack-.NET-Entwickler mit Erfahrung in Backend-Systemen, Datenbanken, Infrastruktur, Netzwerken und DevOps.",
+        "description": "Hamed Sanaei, Softwareentwickler mit Schwerpunkt Full-Stack-.NET. Projekte, Berufserfahrung und Kontakt.",
         "name": "Hamed Sanaei", "job": "Softwareentwickler und Full-Stack-.NET-Entwickler",
         "contacts": "Kontaktlinks", "languages": "Sprache wählen", "skip": "Zum Hauptinhalt",
     },
 }
 
+FAVICON_LINK = '<link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">'
 
 PROJECT_LABELS = {
     "fa": {"source": "کد در گیت‌هاب", "site": "وب‌سایت", "bot": "ربات تلگرام"},
@@ -115,10 +116,23 @@ def render_page(language, base, translations):
     alternates = "\n".join(f'  <link rel="alternate" hreflang="{lang}" href="{base}/{lang}/">' for lang in LOCALES)
     og_alternates = "\n".join(f'  <meta property="og:locale:alternate" content="{locale}">' for lang, locale in LOCALES.items() if lang != language)
     person = {
-        "@context": "https://schema.org", "@type": "Person", "@id": f"{base}/#person",
+        "@type": "Person", "@id": f"{base}/#person",
         "name": meta["name"], "alternateName": "Hamed Sanaei" if language == "fa" else "حامد ثنائی",
         "url": url, "image": f"{base}{profile_image}", "email": "mailto:hamedsan76@gmail.com",
-        "jobTitle": meta["job"], "sameAs": ["https://github.com/HamedSanaei", "https://www.linkedin.com/in/hamedsanaei/", "https://t.me/Hamed_Sanaei", "https://x.com/hamedsan"],
+        "jobTitle": meta["job"],
+        "sameAs": [
+            "https://github.com/HamedSanaei",
+            "https://www.linkedin.com/in/hamedsanaei/",
+            "https://stackoverflow.com/users/10190605/hamed-sanaei",
+            "https://t.me/Hamed_Sanaei",
+            "https://x.com/hamedsan",
+        ],
+    }
+    profile_page = {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "url": url,
+        "mainEntity": person,
     }
     return f'''<!DOCTYPE html>
 <html lang="{language}" dir="{"rtl" if language == "fa" else "ltr"}">
@@ -149,13 +163,13 @@ def render_page(language, base, translations):
   <meta name="twitter:description" content="{esc(meta["description"])}">
   <meta name="twitter:image" content="{base}/assets/portfolio-preview.png">
   <meta name="twitter:image:alt" content="{esc(meta["title"])}">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  {FAVICON_LINK}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Vazirmatn:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css?v={stylesheet_version}">
   <script type="application/ld+json">
-{json.dumps(person, ensure_ascii=False, indent=2)}
+{json.dumps(profile_page, ensure_ascii=False, indent=2)}
   </script>
 </head>
 {render_body(language, translations, profile_image)}
@@ -181,6 +195,8 @@ def build(domain=None):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{META["fa"]["title"]}</title>
+  <meta name="description" content="{html.escape(META["fa"]["description"])}">
+  {FAVICON_LINK}
   <link rel="canonical" href="{base}/fa/">
   <meta http-equiv="refresh" content="0; url=/fa/">
 </head>

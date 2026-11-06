@@ -5,6 +5,7 @@
   "Email": {"fa": "ایمیل", "de": "E-Mail"},
   "GitHub": {"fa": "گیت‌هاب", "de": "GitHub"},
   "LinkedIn": {"fa": "لینکدین", "de": "LinkedIn"},
+  "Stack Overflow": {"fa": "استک‌اورفلو", "de": "Stack Overflow"},
   "CV": {"fa": "رزومه", "de": "Lebenslauf"},
   "I am a software engineer focused on": {"fa": "من مهندس نرم‌افزار هستم و تمرکزم بر", "de": "Ich bin Softwareentwickler mit Schwerpunkt auf"},
   "C#, .NET, ASP.NET and backend systems": {"fa": "سی‌شارپ، دات‌نت، ASP.NET و سیستم‌های بک‌اند", "de": "C#, .NET, ASP.NET und Backend-Systemen"},
