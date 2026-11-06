@@ -69,7 +69,7 @@ def render_projects(language):
     return result + '</div>'
 
 
-def render_body(language, translations):
+def render_body(language, translations, profile_image):
     body = (ROOT / "src/portfolio.html").read_text(encoding="utf-8")
 
     def translate(match):
@@ -84,6 +84,7 @@ def render_body(language, translations):
     body = re.sub(r"(?<=>)[^<]+(?=<)", translate, body)
     body = body.replace('<!-- PROJECTS -->', render_projects(language))
     body = re.sub(r'(href|src)="(assets/[^\"]+)"', r'\1="/\2"', body)
+    body = body.replace('src="/assets/profile.png"', f'src="{profile_image}"')
     body = body.replace('<main>', '<main id="main-content">')
     body = body.replace('aria-label="Contact links"', f'aria-label="{META[language]["contacts"]}"')
     body = body.replace('alt="Hamed Sanaei"', f'alt="{META[language]["name"]}"')
@@ -109,12 +110,14 @@ def render_page(language, base, translations):
     url = f"{base}/{language}/"
     esc = html.escape
     stylesheet_version = sha256((ROOT / "style.css").read_bytes()).hexdigest()[:12]
+    profile_version = sha256((ROOT / "assets/profile.png").read_bytes()).hexdigest()[:12]
+    profile_image = f"/assets/profile.png?v={profile_version}"
     alternates = "\n".join(f'  <link rel="alternate" hreflang="{lang}" href="{base}/{lang}/">' for lang in LOCALES)
     og_alternates = "\n".join(f'  <meta property="og:locale:alternate" content="{locale}">' for lang, locale in LOCALES.items() if lang != language)
     person = {
         "@context": "https://schema.org", "@type": "Person", "@id": f"{base}/#person",
         "name": meta["name"], "alternateName": "Hamed Sanaei" if language == "fa" else "حامد ثنائی",
-        "url": url, "image": f"{base}/assets/profile.png", "email": "mailto:hamedsan76@gmail.com",
+        "url": url, "image": f"{base}{profile_image}", "email": "mailto:hamedsan76@gmail.com",
         "jobTitle": meta["job"], "sameAs": ["https://github.com/HamedSanaei", "https://www.linkedin.com/in/hamedsanaei/", "https://t.me/Hamed_Sanaei", "https://x.com/hamedsan"],
     }
     return f'''<!DOCTYPE html>
@@ -155,7 +158,7 @@ def render_page(language, base, translations):
 {json.dumps(person, ensure_ascii=False, indent=2)}
   </script>
 </head>
-{render_body(language, translations)}
+{render_body(language, translations, profile_image)}
 </html>
 '''
 
