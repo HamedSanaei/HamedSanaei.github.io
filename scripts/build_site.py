@@ -52,7 +52,9 @@ def render_projects(language):
     esc = html.escape
 
     def links(project):
-        result = f'<div class="project-links"><a href="{esc(project["repository"])}" target="_blank" rel="noopener">{labels["source"]}</a>'
+        result = '<div class="project-links">'
+        if project.get("repository"):
+            result += f'<a href="{esc(project["repository"])}" target="_blank" rel="noopener">{labels["source"]}</a>'
         if project.get("live"):
             kind = labels[project.get("liveType", "site")]
             result += f'<a href="{esc(project["live"])}" target="_blank" rel="noopener">{kind} · <bdi dir="ltr">{esc(project["liveLabel"])}</bdi></a>'
@@ -60,12 +62,13 @@ def render_projects(language):
 
     result = '<div class="projects">\n'
     for project in projects["featured"]:
+        technologies = project.get("technologies")
+        technology_tag = f'\n  <span dir="ltr">{esc(technologies)}</span>' if technologies else ""
         result += f'''<article class="project">
   <div><h3><bdi dir="auto">{esc(project["name"])}</bdi></h3>
     <p>{esc(project["description"][language])}</p>
     {links(project)}
-  </div>
-  <span dir="ltr">{esc(project["technologies"])}</span>
+  </div>{technology_tag}
 </article>\n'''
     return result + '</div>'
 

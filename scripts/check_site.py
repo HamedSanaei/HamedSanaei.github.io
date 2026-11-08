@@ -54,8 +54,8 @@ def check(root=ROOT):
             ("https://github.com/HamedSanaei/Vendora", "https://vendorashop.ir/"),
             ("https://github.com/HamedSanaei/cloud", "https://parserver.ir/"),
             ("https://github.com/HamedSanaei/telegram-media-downloader-bot", "https://t.me/DownloadKadeBot"),
-            ("https://github.com/HamedSanaei/cloud-server-seller-bot", "https://t.me/ServerHubbBot"),
-        } and len(page.projects) == 4, f"Expected four projects, each with its source and live link: {lang}"
+            ("https://pluspremium.ir/",),
+        } and len(page.projects) == 4, f"Unexpected featured project links: {lang}"
         for profile in ("https://t.me/Hamed_Sanaei", "https://x.com/hamedsan"):
             assert page.find("a", href=profile), f"Missing social profile: {lang}: {profile}"
         assert page.find("link", rel="canonical") == [{"rel": "canonical", "href": expected[lang]}], f"Canonical: {lang}"

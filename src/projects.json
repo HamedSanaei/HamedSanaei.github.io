@@ -38,17 +38,14 @@
       }
     },
     {
-      "name": "ServerHubbBot",
-      "repository": "https://github.com/HamedSanaei/cloud-server-seller-bot",
-      "technologies": "Python · FastAPI · PostgreSQL · Redis",
+      "name": "Plus Premium",
+      "live": "https://pluspremium.ir/",
+      "liveLabel": "pluspremium.ir",
       "description": {
-        "en": "Telegram-first cloud server platform starter with provider integrations, background orchestration, wallet accounting and billing.",
-        "fa": "پایهٔ پلتفرم فروش سرور از طریق تلگرام با اتصال به ارائه‌دهندگان، اجرای عملیات در پس‌زمینه، حسابداری کیف پول و محاسبهٔ هزینه‌ها.",
-        "de": "Starter für eine Telegram-basierte Cloud-Server-Plattform mit Anbieterintegrationen, Hintergrundverarbeitung, Wallet-Buchhaltung und Abrechnung."
-      },
-      "live": "https://t.me/ServerHubbBot",
-      "liveLabel": "@ServerHubbBot",
-      "liveType": "bot"
+        "en": "An online store for premium subscriptions and international services, with payments in Iranian rials.",
+        "fa": "فروشگاه آنلاین اشتراک‌های پریمیوم و خدمات بین‌المللی با امکان پرداخت ریالی.",
+        "de": "Onlineshop für Premium-Abos und internationale Dienste mit Zahlung in iranischen Rial."
+      }
     }
   ]
 }
