@@ -120,7 +120,16 @@ def render_page(language, base, translations):
     og_alternates = "\n".join(f'  <meta property="og:locale:alternate" content="{locale}">' for lang, locale in LOCALES.items() if lang != language)
     person = {
         "@type": "Person", "@id": f"{base}/#person",
-        "name": meta["name"], "alternateName": "Hamed Sanaei" if language == "fa" else "حامد ثنائی",
+        "name": meta["name"],
+        "alternateName": [
+            "Hamed Sanaei" if language == "fa" else "حامد ثنائی",
+            "حامد ثنایی",
+            "حامد ثنائئ",
+            "hamed sanaei",
+            "hamed san",
+            "hamed sanaee",
+            "hamed sanaie",
+        ],
         "url": url, "image": f"{base}{profile_image}", "email": "mailto:hamedsan76@gmail.com",
         "jobTitle": meta["job"],
         "sameAs": [
